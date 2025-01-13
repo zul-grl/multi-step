@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 
-const Input = ({ text, placeholder, error }) => {
+const Input = ({ text, placeholder, error, type }) => {
   const [value, setValue] = useState("");
 
   const handleChange = (e) => {
@@ -16,10 +16,10 @@ const Input = ({ text, placeholder, error }) => {
       </p>
       <input
         className={`
-          outline-[#0CA5E9] border rounded-lg p-2 w-[100%] 
+          outline-[#0CA5E9] border rounded-lg p-2 w-[100%]
           ${value === "" ? "focus:border-[#E14942]" : "focus:border-[#0CA5E9]"}
         `}
-        type="text"
+        type={type}
         placeholder={placeholder}
         onChange={handleChange}
       />

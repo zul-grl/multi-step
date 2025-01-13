@@ -1,27 +1,31 @@
 import Button from "./Button";
 import Header from "./Header";
 import Input from "./Input";
-const Second = ({ handleBack ,handleNext}) => {
+const Second = ({ handleBack, handleNext }) => {
   const inputs = [
     {
       name: "Email*",
       placeholder: "Your email",
       error: "Мэйл хаягаа оруулна уу",
+      type: "email",
     },
     {
       name: "Phone number",
       placeholder: "Your phone number",
       error: "Утасны дугаараа оруулна уу..",
+      type: "email",
     },
     {
       name: "Password",
       placeholder: "Your password",
       error: "Нууц үгээ оруулна уу",
+      type: "password",
     },
     {
       name: "Confirm password",
       placeholder: "Confirm password",
       error: "Нууц үгээ давтаж оруулна уу",
+      type: "password",
     },
   ];
   return (
@@ -34,6 +38,7 @@ const Second = ({ handleBack ,handleNext}) => {
             text={input.name}
             placeholder={input.placeholder}
             error={input.error}
+            type={input.type}
           />
         ))}
       </div>

@@ -8,16 +8,19 @@ const First = ({ handleNext }) => {
       name: "First name",
       placeholder: "Your first name",
       error: "Нэрээ оруулна уу",
+      type: "text",
     },
     {
       name: "Last name",
       placeholder: "Your last name",
       error: "Овгоо оруулна уу.",
+      type: "text",
     },
     {
       name: "Username",
       placeholder: "Your username",
       error: "Хэрэглэгчийн нэрээ оруулна уу",
+      type: "text",
     },
   ];
   return (
@@ -30,6 +33,7 @@ const First = ({ handleNext }) => {
             text={input.name}
             placeholder={input.placeholder}
             error={input.error}
+            type={input.type}
           />
         ))}
       </div>
