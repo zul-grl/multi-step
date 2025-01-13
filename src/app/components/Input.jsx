@@ -15,9 +15,11 @@ const Input = ({ text, placeholder, error, type }) => {
         <span className="text-red-600">*</span>
       </p>
       <input
-        className={`
+        className={`relative
           outline-[#0CA5E9] border rounded-lg p-2 w-[100%]
-          ${value === "" ? "focus:border-[#E14942]" : "focus:border-[#0CA5E9]"}
+          focus:border-[#0CA5E9] ${
+            value === "" ? "border-[#E14942]" : "border-[#0CA5E9]"
+          }
         `}
         type={type}
         placeholder={placeholder}
