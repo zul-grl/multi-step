@@ -1,6 +1,6 @@
 const Header = () => {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col gap-2">
       <div className="w-[60px] h-[60px]">
         <img src="./logo.png" alt="" />
       </div>
