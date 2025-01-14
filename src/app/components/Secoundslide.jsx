@@ -8,18 +8,21 @@ const Second = ({ handleBack, handleNext }) => {
       placeholder: "Your email",
       error: "Мэйл хаягаа оруулна уу",
       type: "email",
+      input: "firstName",
     },
     {
       name: "Phone number",
       placeholder: "Your phone number",
       error: "Утасны дугаараа оруулна уу..",
       type: "email",
+      input: "phoneNumber",
     },
     {
       name: "Password",
       placeholder: "Your password",
       error: "Нууц үгээ оруулна уу",
       type: "password",
+      input: "password",
     },
     {
       name: "Confirm password",
@@ -34,6 +37,7 @@ const Second = ({ handleBack, handleNext }) => {
         <Header />
         {inputs.map((input, index) => (
           <Input
+            name={input.input}
             key={index}
             text={input.name}
             placeholder={input.placeholder}

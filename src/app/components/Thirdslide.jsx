@@ -1,6 +1,7 @@
 import Header from "./Header";
 import Button from "./Button";
 import Input from "./Input";
+import { Image } from "lucide-react";
 import { useState } from "react";
 
 const Third = ({ handleBack, handleNext }) => {
@@ -27,12 +28,12 @@ const Third = ({ handleBack, handleNext }) => {
           </p>
 
           <div className="bg-[#7F7F800D] w-[100%] h-[180px] rounded-md p-2 flex flex-col items-center justify-center gap-2">
-            <div className="bg-white flex items-center justify-center rounded-full w-[28px] h-[28px]">
-              <img src="./image.svg" alt="" className="w-[9px]" />
+            <div className="bg-white flex items-center justify-center rounded-full w-[45px] h-[45px]">
+              <Image />
             </div>
             <span className="text-black">Add Image</span>
           </div>
-          {/* <input type="file" onChange={handleFileChange} /> */}
+          <input type="file" onChange={handleFileChange} />
         </div>
         {fileName === "" && (
           <p className="text-red-600 text-sm">Профайл зурагаа оруулна уу</p>

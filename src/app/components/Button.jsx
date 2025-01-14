@@ -1,3 +1,5 @@
+import { ChevronRight } from "lucide-react";
+
 const Button = ({ variant, handleClick }) => {
   const styles = {
     primary:
@@ -13,15 +15,10 @@ const Button = ({ variant, handleClick }) => {
         return "Continue 2/3 >";
       case "3/3":
         return "Submit 3/3 >";
-      case "loading":
-        return <>Continue</>;
       case "back":
         return "< Back";
-      default:
-        return "Continue 1/3 >";
     }
   };
-
   return (
     <button
       onClick={handleClick}

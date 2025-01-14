@@ -2,24 +2,27 @@ import Input from "./Input";
 import Header from "./Header";
 import Button from "./Button";
 
-const First = ({ handleNext }) => {
+const First = ({ handleNext, handleChange, formErrors }) => {
   const inputs = [
     {
       name: "First name",
       placeholder: "Your first name",
-      error: "Нэрээ оруулна уу",
+      formErrors: formErrors.firstName,
+      input: "firstName",
       type: "text",
     },
     {
       name: "Last name",
       placeholder: "Your last name",
-      error: "Овгоо оруулна уу.",
+      formErrors: formErrors.lastName,
+      input: "lastName",
       type: "text",
     },
     {
       name: "Username",
       placeholder: "Your username",
-      error: "Хэрэглэгчийн нэрээ оруулна уу",
+      formErrors: formErrors.userName,
+      input: "userName",
       type: "text",
     },
   ];
@@ -29,11 +32,14 @@ const First = ({ handleNext }) => {
         <Header />
         {inputs.map((input, index) => (
           <Input
+            name={input.input}
             key={index}
             text={input.name}
             placeholder={input.placeholder}
             error={input.error}
             type={input.type}
+            handleChange={handleChange}
+            formErrors={input.formErrors}
           />
         ))}
       </div>
