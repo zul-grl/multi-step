@@ -4,7 +4,13 @@ import Input from "./Input";
 import { Image } from "lucide-react";
 import { useState } from "react";
 
-const Third = ({ handleBack, handleNext }) => {
+const Third = ({
+  handleBack,
+  handleNext,
+  handleChange,
+  formErrors,
+  formValues,
+}) => {
   const [fileName, setFileName] = useState("");
   const handleFileChange = (e) => {
     const file = e.target.files;
@@ -19,7 +25,9 @@ const Third = ({ handleBack, handleNext }) => {
           type="date"
           text="Date of birth"
           placeholder="Select your date of birth"
-          error="Төрсөн өдрөө оруулна уу"
+          handleChange={handleChange}
+          formErrors={formErrors.dateOfBirth}
+          formValues={formValues}
         />
         <div className="flex flex-col mt-[12px]">
           <p className="text-[#334155] font-bold text-[14px]">

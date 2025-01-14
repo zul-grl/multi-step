@@ -2,44 +2,42 @@ import Input from "./Input";
 import Header from "./Header";
 import Button from "./Button";
 
-const First = ({ handleNext, handleChange, formErrors }) => {
+const First = ({ handleNext, handleChange, formErrors, formValues }) => {
   const inputs = [
     {
       name: "First name",
       placeholder: "Your first name",
-      formErrors: formErrors.firstName,
       input: "firstName",
       type: "text",
     },
     {
       name: "Last name",
       placeholder: "Your last name",
-      formErrors: formErrors.lastName,
       input: "lastName",
       type: "text",
     },
     {
       name: "Username",
       placeholder: "Your username",
-      formErrors: formErrors.userName,
       input: "userName",
       type: "text",
     },
   ];
+
   return (
     <div className="bg-[#FFFFFF] w-[480px] h-[655px] flex flex-col rounded-s-lg justify-between p-8">
       <div>
         <Header />
         {inputs.map((input, index) => (
           <Input
-            name={input.input}
             key={index}
+            name={input.input}
             text={input.name}
             placeholder={input.placeholder}
-            error={input.error}
             type={input.type}
             handleChange={handleChange}
-            formErrors={input.formErrors}
+            formErrors={formErrors[input.input]}
+            formValues={formValues}
           />
         ))}
       </div>

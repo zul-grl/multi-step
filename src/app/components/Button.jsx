@@ -1,5 +1,3 @@
-import { ChevronRight } from "lucide-react";
-
 const Button = ({ variant, handleClick }) => {
   const styles = {
     primary:
@@ -17,6 +15,8 @@ const Button = ({ variant, handleClick }) => {
         return "Submit 3/3 >";
       case "back":
         return "< Back";
+      default:
+        return "Button";
     }
   };
   return (

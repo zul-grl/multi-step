@@ -1,48 +1,54 @@
-import Button from "./Button";
-import Header from "./Header";
 import Input from "./Input";
-const Second = ({ handleBack, handleNext }) => {
+import Header from "./Header";
+import Button from "./Button";
+const Second = ({
+  handleBack,
+  handleNext,
+  handleChange,
+  formErrors,
+  formValues,
+}) => {
   const inputs = [
     {
-      name: "Email*",
+      name: "Email",
       placeholder: "Your email",
-      error: "Мэйл хаягаа оруулна уу",
+      input: "email",
       type: "email",
-      input: "firstName",
     },
     {
       name: "Phone number",
       placeholder: "Your phone number",
-      error: "Утасны дугаараа оруулна уу..",
-      type: "email",
       input: "phoneNumber",
+      type: "tel",
     },
     {
       name: "Password",
       placeholder: "Your password",
-      error: "Нууц үгээ оруулна уу",
-      type: "password",
       input: "password",
+      type: "password",
     },
     {
       name: "Confirm password",
       placeholder: "Confirm password",
-      error: "Нууц үгээ давтаж оруулна уу",
+      input: "confirmPassword",
       type: "password",
     },
   ];
+
   return (
     <div className="bg-[#FFFFFF] w-[480px] h-[655px] flex flex-col rounded-s-lg justify-between p-8">
       <div>
         <Header />
         {inputs.map((input, index) => (
           <Input
-            name={input.input}
             key={index}
+            name={input.input}
             text={input.name}
             placeholder={input.placeholder}
-            error={input.error}
             type={input.type}
+            handleChange={handleChange}
+            formErrors={formErrors[input.input]}
+            formValues={formValues}
           />
         ))}
       </div>
@@ -53,5 +59,4 @@ const Second = ({ handleBack, handleNext }) => {
     </div>
   );
 };
-
 export default Second;
