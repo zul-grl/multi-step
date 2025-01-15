@@ -35,10 +35,20 @@ const Second = ({
       type: "password",
     },
   ];
+  const validateEmail = (email) => {
+    const regex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+    return regex.test(email);
+  };
   const handleClick = () => {
     let haveError = false;
     if (!formValues.email.trim()) {
       setFormErrors((prev) => ({ ...prev, email: "Мэйл хаягаа оруулна уу" }));
+      haveError = true;
+    } else if (!validateEmail(formValues.email)) {
+      setFormErrors((prev) => ({
+        ...prev,
+        email: "Зөв мэйл хаяг оруулна уу",
+      }));
       haveError = true;
     }
     if (!formValues.phoneNumber.trim()) {

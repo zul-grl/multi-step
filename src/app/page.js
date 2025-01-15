@@ -26,6 +26,7 @@ export default function Home() {
     password: "",
     confirmPassword: "",
     dateOfBirth: "",
+    fileName: "",
   });
 
   const [formErrors, setFormErrors] = useState({
@@ -37,6 +38,7 @@ export default function Home() {
     password: "",
     confirmPassword: "",
     dateOfBirth: "",
+    fileName: "",
   });
 
   const handleChange = (event) => {
