@@ -7,6 +7,7 @@ const Second = ({
   handleChange,
   formErrors,
   formValues,
+  setFormErrors,
 }) => {
   const inputs = [
     {
@@ -34,7 +35,61 @@ const Second = ({
       type: "password",
     },
   ];
-
+  const handleClick = () => {
+    let haveError = false;
+    if (!formValues.email.trim()) {
+      setFormErrors((prev) => ({ ...prev, email: "Мэйл хаягаа оруулна уу" }));
+      haveError = true;
+    }
+    if (!formValues.phoneNumber.trim()) {
+      setFormErrors((prev) => ({
+        ...prev,
+        phoneNumber: "Утасны дугаараа оруулна уу.",
+      }));
+      haveError = true;
+    } else if (formValues.phoneNumber.trim().length < 8) {
+      setFormErrors((prev) => ({
+        ...prev,
+        phoneNumber: "8 оронтой дугаар оруулна уу.",
+      }));
+      haveError = true;
+    } else if (isNaN(formValues.phoneNumber.trim())) {
+      setFormErrors((prev) => ({
+        ...prev,
+        phoneNumber: "Зөв утасны дугаар оруулна уу",
+      }));
+      haveError = true;
+    }
+    if (!formValues.password.trim()) {
+      setFormErrors((prev) => ({
+        ...prev,
+        password: "Нууц үгээ оруулна уу",
+      }));
+      haveError = true;
+    } else if (formValues.password.trim().length < 6) {
+      setFormErrors((prev) => ({
+        ...prev,
+        password: "6 оронтой тоо оруулна уу",
+      }));
+      haveError = true;
+    }
+    if (!formValues.confirmPassword.trim()) {
+      setFormErrors((prev) => ({
+        ...prev,
+        confirmPassword: "Нууц үгээ давтаж оруулна уу",
+      }));
+      haveError = true;
+    } else if (formValues.password !== formValues.confirmPassword) {
+      setFormErrors((prev) => ({
+        ...prev,
+        confirmPassword: "Нууц үг таарахгүй байна",
+      }));
+      haveError = true;
+    }
+    if (!haveError) {
+      handleNext();
+    }
+  };
   return (
     <div className="bg-[#FFFFFF] w-[480px] h-[655px] flex flex-col rounded-s-lg justify-between p-8">
       <div>
@@ -54,7 +109,7 @@ const Second = ({
       </div>
       <div className="flex justify-between gap-2">
         <Button variant="back" handleClick={handleBack} />
-        <Button variant="2/3" handleClick={handleNext} />
+        <Button variant="2/3" handleClick={handleClick} />
       </div>
     </div>
   );
