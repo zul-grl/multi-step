@@ -2,6 +2,7 @@ import Header from "./Header";
 import Button from "./Button";
 import Input from "./Input";
 import { Image } from "lucide-react";
+import { useState } from "react";
 
 const Third = ({
   handleBack,
@@ -11,11 +12,14 @@ const Third = ({
   formValues,
   setFormErrors,
 }) => {
+  const [imageUrl, setimageUrl] = useState();
   const handleFileChange = (e) => {
     const file = e.target.files[0];
+    const imageUrl = URL.createObjectURL(file);
     if (file) {
       handleChange({ target: { name: "fileName", value: file.name } });
       setFormErrors((prev) => ({ ...prev, fileName: "" }));
+      setimageUrl(imageUrl);
     } else {
       handleChange({ target: { name: "fileName", value: "" } });
     }
@@ -23,7 +27,6 @@ const Third = ({
 
   const handleClick = () => {
     let haveError = false;
-
     if (!formValues.dateOfBirth.trim()) {
       setFormErrors((prev) => ({
         ...prev,
@@ -50,10 +53,14 @@ const Third = ({
     if (!haveError) {
       handleNext();
     }
+    localStorage.setItem("dateOfBirth", formValues.dateOfBirth);
+    localStorage.setItem("imageUrl", URL.createObjectURL(file));
   };
 
   return (
-    <div className="bg-[#FFFFFF] w-[480px] h-[655px] flex flex-col rounded-s-lg justify-between p-8">
+    <div
+      className={`bg-[#FFFFFF] w-[480px] h-[655px] flex flex-col rounded-s-lg justify-between p-8 `}
+    >
       <div>
         <Header />
         <Input
@@ -65,17 +72,33 @@ const Third = ({
           formErrors={formErrors.dateOfBirth}
           formValues={formValues}
         />
-        <div className="flex flex-col mt-[12px]">
+        <div className="flex flex-col mt-[12px] bg-{}">
           <p className="text-[#334155] font-bold text-[14px]">
             Profile image
             <span className="text-red-600">*</span>
           </p>
           <label htmlFor="fileInput" className="cursor-pointer">
-            <div className="bg-[#7F7F800D] w-[100%] h-[180px] rounded-md p-2 flex flex-col items-center justify-center gap-2">
-              <div className="bg-white flex items-center justify-center rounded-full w-[45px] h-[45px]">
+            <div
+              style={{
+                backgroundImage: `url(${imageUrl})`,
+                overflow: "hidden",
+                backgroundPosition: "center",
+                backgroundSize: "cover",
+              }}
+              className="bg-[#7F7F800D] w-[100%] h-[180px] rounded-md p-2 flex flex-col items-center justify-center gap-2"
+            >
+              <div
+                className={
+                  imageUrl
+                    ? "hidden"
+                    : "bg-white flex items-center justify-center rounded-full w-[45px] h-[45px]"
+                }
+              >
                 <Image />
               </div>
-              <span className="text-black">Add Image</span>
+              <span className={imageUrl ? "hidden" : "text-black"}>
+                Add Image
+              </span>
             </div>
           </label>
           <input

@@ -99,9 +99,13 @@ const Second = ({
     if (!haveError) {
       handleNext();
     }
+    localStorage.setItem("email", formValues.email);
+    localStorage.setItem("phoneNumber", formValues.phoneNumber);
+    localStorage.setItem("password", formValues.password);
+    localStorage.setItem("confirmPassword", formValues.confirmPassword);
   };
   return (
-    <div className="bg-[#FFFFFF] w-[480px] h-[655px] flex flex-col rounded-s-lg justify-between p-8">
+    <div className="bg-[#FFFFFF] w-[480px] min-h-[655px] flex flex-col rounded-s-lg justify-between p-8">
       <div>
         <Header />
         {inputs.map((input, index) => (
@@ -117,7 +121,7 @@ const Second = ({
           />
         ))}
       </div>
-      <div className="flex justify-between gap-2">
+      <div className="flex justify-between gap-2 mt-6">
         <Button variant="back" handleClick={handleBack} />
         <Button variant="2/3" handleClick={handleClick} />
       </div>

@@ -47,14 +47,16 @@ const First = ({
       }));
       haveError = true;
     }
-
     if (!haveError) {
       handleNext();
     }
+    localStorage.setItem("firstName", formValues.firstName);
+    localStorage.setItem("lastName", formValues.lastName);
+    localStorage.setItem("userName", formValues.userName);
   };
 
   return (
-    <div className="bg-[#FFFFFF] w-[480px] h-[655px] flex flex-col rounded-s-lg justify-between p-8">
+    <div className="bg-[#FFFFFF] w-[480px] min-h-[655px] flex flex-col rounded-s-lg justify-between p-8">
       <div>
         <Header />
         {inputs.map((input, index) => (

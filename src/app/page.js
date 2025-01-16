@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import First from "./components/Firstslide";
 import Second from "./components/Secoundslide";
 import Third from "./components/Thirdslide";
@@ -27,8 +27,8 @@ export default function Home() {
     confirmPassword: "",
     dateOfBirth: "",
     fileName: "",
+    imageUrl: "",
   });
-
   const [formErrors, setFormErrors] = useState({
     firstName: "",
     lastName: "",
@@ -39,8 +39,31 @@ export default function Home() {
     confirmPassword: "",
     dateOfBirth: "",
     fileName: "",
+    imageUrl: "",
   });
-
+  useEffect(() => {
+    const email = localStorage.getItem("email");
+    const firstName = localStorage.getItem("firstName");
+    const lastName = localStorage.getItem("lastName");
+    const userName = localStorage.getItem("userName");
+    const phoneNumber = localStorage.getItem("phoneNumber");
+    const password = localStorage.getItem("password");
+    const confirmPassword = localStorage.getItem("confirmPassword");
+    const dateOfBirth = localStorage.getItem("dateOfBirth");
+    const imageUrl = localStorage.getItem("imageUrl");
+    setFormValues({
+      ...formValues,
+      email: email,
+      firstName: firstName,
+      lastName: lastName,
+      userName: userName,
+      phoneNumber: phoneNumber,
+      password: password,
+      confirmPassword: confirmPassword,
+      dateOfBirth: dateOfBirth,
+      imageUrl: imageUrl,
+    });
+  }, []);
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormValues((prev) => ({ ...prev, [name]: value }));
