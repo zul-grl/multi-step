@@ -1,7 +1,8 @@
 import Input from "./Input";
 import Header from "./Header";
 import Button from "./Button";
-
+import * as motion from "motion/react-client";
+import { useState } from "react";
 const First = ({
   handleNext,
   handleChange,
@@ -9,6 +10,7 @@ const First = ({
   formValues,
   setFormErrors,
 }) => {
+  const [isVisible, setIsVisible] = useState(true);
   const inputs = [
     {
       name: "First name",
@@ -53,10 +55,17 @@ const First = ({
     localStorage.setItem("firstName", formValues.firstName);
     localStorage.setItem("lastName", formValues.lastName);
     localStorage.setItem("userName", formValues.userName);
+    setIsVisible(!isVisible);
   };
 
   return (
-    <div className="bg-[#FFFFFF] w-[480px] min-h-[655px] flex flex-col rounded-s-lg justify-between p-8">
+    <motion.div
+      initial={{ x: 20, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      exit={{ x: -20, opacity: 0 }}
+      transition={{ duration: 0.7 }}
+      className="bg-[#FFFFFF] w-[480px] min-h-[655px] flex flex-col rounded-s-lg justify-between p-8"
+    >
       <div>
         <Header />
         {inputs.map((input, index) => (
@@ -73,7 +82,7 @@ const First = ({
         ))}
       </div>
       <Button variant="1/3" handleClick={handleClick} />
-    </div>
+    </motion.div>
   );
 };
 

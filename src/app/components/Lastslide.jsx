@@ -1,4 +1,5 @@
 const Last = () => {
+  localStorage.setItem("currentslide", 0);
   return (
     <div className="bg-[#FFFFFF] w-[480px] h-[193px] rounded-s-lg justify-between p-8">
       <div className="flex flex-col gap-2">

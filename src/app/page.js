@@ -4,17 +4,21 @@ import First from "./components/Firstslide";
 import Second from "./components/Secoundslide";
 import Third from "./components/Thirdslide";
 import Last from "./components/Lastslide";
+import { AnimatePresence } from "motion/react";
 
 export default function Home() {
   const [currentslide, setCurrentslide] = useState(0);
+  const [isVisible, setIsVisible] = useState(true);
   const Formstep = [First, Second, Third, Last][currentslide];
-
   const handleNext = () => {
     setCurrentslide(currentslide + 1);
+    localStorage.setItem("currentslide", currentslide + 1);
   };
 
   const handleBack = () => {
     setCurrentslide(currentslide - 1);
+    setIsVisible(!isVisible);
+    localStorage.setItem("currentslide", currentslide - 1);
   };
 
   const [formValues, setFormValues] = useState({
@@ -51,6 +55,9 @@ export default function Home() {
     const confirmPassword = localStorage.getItem("confirmPassword");
     const dateOfBirth = localStorage.getItem("dateOfBirth");
     const imageUrl = localStorage.getItem("imageUrl");
+    const fileName = localStorage.getItem("fileName");
+    const currentslide = localStorage.getItem("currentslide");
+    setCurrentslide(Number(currentslide));
     setFormValues({
       ...formValues,
       email: email,
@@ -62,6 +69,7 @@ export default function Home() {
       confirmPassword: confirmPassword,
       dateOfBirth: dateOfBirth,
       imageUrl: imageUrl,
+      fileName: fileName,
     });
   }, []);
   const handleChange = (event) => {
@@ -72,14 +80,18 @@ export default function Home() {
 
   return (
     <div className="flex w-full h-[100vh] bg-[#F4F4F4] items-center justify-center">
-      <Formstep
-        setFormErrors={setFormErrors}
-        handleBack={handleBack}
-        handleNext={handleNext}
-        handleChange={handleChange}
-        formErrors={formErrors}
-        formValues={formValues}
-      />
+      <div>
+        <AnimatePresence initial={false}>
+          <Formstep
+            setFormErrors={setFormErrors}
+            handleBack={handleBack}
+            handleNext={handleNext}
+            handleChange={handleChange}
+            formErrors={formErrors}
+            formValues={formValues}
+          />
+        </AnimatePresence>
+      </div>
     </div>
   );
 }

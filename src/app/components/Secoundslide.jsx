@@ -1,6 +1,8 @@
 import Input from "./Input";
 import Header from "./Header";
 import Button from "./Button";
+import * as motion from "motion/react-client";
+import { useState } from "react";
 const Second = ({
   handleBack,
   handleNext,
@@ -9,6 +11,7 @@ const Second = ({
   formValues,
   setFormErrors,
 }) => {
+  const [isVisible, setIsVisible] = useState(true);
   const inputs = [
     {
       name: "Email",
@@ -103,9 +106,17 @@ const Second = ({
     localStorage.setItem("phoneNumber", formValues.phoneNumber);
     localStorage.setItem("password", formValues.password);
     localStorage.setItem("confirmPassword", formValues.confirmPassword);
+
+    setIsVisible(!isVisible);
   };
   return (
-    <div className="bg-[#FFFFFF] w-[480px] min-h-[655px] flex flex-col rounded-s-lg justify-between p-8">
+    <motion.div
+      initial={{ x: 20, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      exit={{ x: -20, opacity: 0 }}
+      transition={{ duration: 0.7 }}
+      className="bg-[#FFFFFF] w-[480px] min-h-[655px] flex flex-col rounded-s-lg justify-between p-8"
+    >
       <div>
         <Header />
         {inputs.map((input, index) => (
@@ -125,7 +136,7 @@ const Second = ({
         <Button variant="back" handleClick={handleBack} />
         <Button variant="2/3" handleClick={handleClick} />
       </div>
-    </div>
+    </motion.div>
   );
 };
 export default Second;
