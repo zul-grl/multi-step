@@ -12,16 +12,24 @@ const Third = ({
   formValues,
   setFormErrors,
 }) => {
-  const [imageUrl, setimageUrl] = useState();
+  const [imageUrl, setImageUrl] = useState(formValues.imageUrl || "");
+
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    const imageUrl = URL.createObjectURL(file);
     if (file) {
+      const imageUrl = URL.createObjectURL(file);
+      setImageUrl(imageUrl);
       handleChange({ target: { name: "fileName", value: file.name } });
+      handleChange({ target: { name: "imageUrl", value: imageUrl } });
       setFormErrors((prev) => ({ ...prev, fileName: "" }));
-      setimageUrl(imageUrl);
     } else {
+      setImageUrl("");
       handleChange({ target: { name: "fileName", value: "" } });
+      handleChange({ target: { name: "imageUrl", value: "" } });
+      setFormErrors((prev) => ({
+        ...prev,
+        fileName: "Профайл зурагаа оруулна уу",
+      }));
     }
   };
 
@@ -54,7 +62,7 @@ const Third = ({
       handleNext();
     }
     localStorage.setItem("dateOfBirth", formValues.dateOfBirth);
-    localStorage.setItem("imageUrl", URL.createObjectURL(file));
+    localStorage.setItem("imageUrl", imageUrl);
   };
 
   return (
@@ -87,18 +95,14 @@ const Third = ({
               }}
               className="bg-[#7F7F800D] w-[100%] h-[180px] rounded-md p-2 flex flex-col items-center justify-center gap-2"
             >
-              <div
-                className={
-                  imageUrl
-                    ? "hidden"
-                    : "bg-white flex items-center justify-center rounded-full w-[45px] h-[45px]"
-                }
-              >
-                <Image />
-              </div>
-              <span className={imageUrl ? "hidden" : "text-black"}>
-                Add Image
-              </span>
+              {!imageUrl && (
+                <>
+                  <div className="bg-white flex items-center justify-center rounded-full w-[45px] h-[45px]">
+                    <Image />
+                  </div>
+                  <span className="text-black">Add Image</span>
+                </>
+              )}
             </div>
           </label>
           <input
